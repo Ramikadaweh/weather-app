@@ -1,0 +1,12 @@
+.loader{
+  color: white;
+  position: absolute;
+  margin-top: 7rem;
+  margin-left: -2.5rem;
+  font-size: 22px;
+  align-self: center;
+}
+
+.loader-ex{
+  margin-top: 15rem;
+}

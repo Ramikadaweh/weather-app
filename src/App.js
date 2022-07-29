@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Login from "./pages/login";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import WeatherNow from "./pages/weatherNow";
+import WeatherExtended from "./pages/weatherExtended";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { useSelector } from "react-redux";
 
 function App() {
+  const user = useSelector((user) => user);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Login />}></Route>
+          <Route element={<ProtectedRoute email={user?.email} />}>
+            <Route exact path="/weatherNow" element={<WeatherNow />} />
+            <Route
+              exact
+              path="/weatherExtended"
+              element={<WeatherExtended />}
+            />
+            <Route
+              exact
+              path="/weatherExtended/:id"
+              element={<WeatherExtended />}
+            />
+          </Route>
+        </Routes>
+      </Router>
     </div>
   );
 }
